@@ -20,5 +20,8 @@ app.use(express.json(),
 const devRoutes = require('./routes/developer.route')
 devRoutes(app)
 
+const orgRoute = require('./routes/org.route')
+orgRoute(app)
+
 
 app.listen(PORT, () => console.log(`The server is running on PORT ${PORT}`))

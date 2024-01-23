@@ -20,7 +20,9 @@ const developerSchema = new mongoose.Schema({
         type: String,
         required: [true, "The Password Name Is Required"],
         minlegth: [6, 'Password must be at least 6 characters long']
-    },
+    },skills : {
+        type : Array
+    }
 })
 
 developerSchema.statics.login  = async function (email,password) {
