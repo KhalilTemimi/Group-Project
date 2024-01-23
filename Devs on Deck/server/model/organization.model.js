@@ -35,4 +35,20 @@ const orgSchema = new mongoose.Schema({
     }
 })
 
+orgSchema.statics.login = async function (email, password) {
+    
+    if (!email || !password) {
+        throw new Error('All fields are required')
+    }
+    const org = await this.findOne({ email: email })
+    if (org) {
+        if (org.password === password) {
+            return org
+        }
+        throw new Error("The password is incorrect")
+    }
+    throw new Error("The email is incorrect")
+
+}
+
 module.exports = mongoose.model("organization", orgSchema)

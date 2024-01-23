@@ -7,7 +7,6 @@ module.exports.register = async (req, res) => {
         res.status(200).json(dev)
     } catch (err) {
         const errors = HandleErrors(err)
-        console.log(err.message)
         res.json(errors)
     }
 }
