@@ -13,14 +13,12 @@ app.use(express.json(),
     express.urlencoded({ extended: true }),
     cors(
         {
-            origin: ["http://localhost:5000"], // specify the origin that is allowed to access the server resources
-            credentials: true // allowed to send credentials (cookies/tokens)
+            origin: ["http://localhost:5000"],
+            credentials: true
         }))
 
 const devRoutes = require('./routes/developer.route')
 devRoutes(app)
-
-
 
 
 app.listen(PORT, () => console.log(`The server is running on PORT ${PORT}`))

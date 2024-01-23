@@ -23,4 +23,18 @@ const developerSchema = new mongoose.Schema({
     },
 })
 
+developerSchema.statics.login  = async function (email,password) {
+    if(!email || !password) {
+        throw new Error('All fields are required')
+    }
+    const dev = await this.findOne({email:email})
+    if(dev) {
+        if(dev.password===password) {
+            return dev
+        }
+        throw new Error("The password is incorrect")
+    }
+    throw new Error("The email is incorrect")
+}
+
 module.exports = mongoose.model('developer', developerSchema)

@@ -8,18 +8,16 @@ const HandleErrors = (err) => {
     if (err.message === "All fields must be filled") {
         errors.fields = err.message
     }
-    //already existing email (in registering)
+
     if (err.code === 11000) {
         errors.email = "That email is already registered"
     }
 
-    // incorrect email 
     if (err.message === "The email is incorrect") {
         errors.email = err.message
 
     }
 
-    // incorrect password 
     if (err.message === "The password is incorrect") {
         errors.password = err.message
     }
@@ -39,6 +37,17 @@ module.exports.register = async (req, res) => {
     } catch (err) {
         const errors = HandleErrors(err)
         console.log(err.message)
+        res.json(errors)
+    }
+}
+
+module.exports.login = async (req, res) => {
+    const { email, password } = req.body
+    try {
+        const dev = await developer.login(email, password)
+        res.json(dev)
+    } catch (err) {
+        const errors = HandleErrors(err)
         res.json(errors)
     }
 }
