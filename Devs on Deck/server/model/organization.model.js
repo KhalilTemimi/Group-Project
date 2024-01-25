@@ -31,12 +31,20 @@ const orgSchema = new mongoose.Schema({
         required: [true, 'The Password is Required'],
         minlegth: [6, 'Password must be at least 6 characters long']
     }, positions: {
-        type: Array
+        name: {
+            type: String
+        },
+        description: {
+            type: String
+        },
+        skills: {
+            type: Array
+        }
     }
 })
 
 orgSchema.statics.login = async function (email, password) {
-    
+
     if (!email || !password) {
         throw new Error('All fields are required')
     }

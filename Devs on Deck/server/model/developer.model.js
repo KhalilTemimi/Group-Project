@@ -20,18 +20,18 @@ const developerSchema = new mongoose.Schema({
         type: String,
         required: [true, "The Password Name Is Required"],
         minlegth: [6, 'Password must be at least 6 characters long']
-    },skills : {
-        type : Array
+    }, skills: {
+        type: Array
     }
 })
 
-developerSchema.statics.login  = async function (email,password) {
-    if(!email || !password) {
+developerSchema.statics.login = async function (email, password) {
+    if (!email || !password) {
         throw new Error('All fields are required')
     }
-    const dev = await this.findOne({email:email})
-    if(dev) {
-        if(dev.password===password) {
+    const dev = await this.findOne({ email: email })
+    if (dev) {
+        if (dev.password === password) {
             return dev
         }
         throw new Error("The password is incorrect")
@@ -39,4 +39,17 @@ developerSchema.statics.login  = async function (email,password) {
     throw new Error("The email is incorrect")
 }
 
+const containArray = (skills, resSkills) => {
+    return resSkills.some(skill => skills.includes(skill));
+}
+
+developerSchema.statics.getDev = async function (skills) {
+
+    const resultArray = await this.find()
+    const filteredArr = resultArray.filter(res => {
+        return containArray(skills, res.skills)
+    })
+    if (filteredArr.length > 0) return filteredArr
+
+}
 module.exports = mongoose.model('developer', developerSchema)
