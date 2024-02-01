@@ -15,10 +15,10 @@ const OrgLogin = () => {
             email,
             Password
         }
-        axios.post("http://localhost:8000/api/logIn", organization)
+        axios.post("http://localhost:8000/api/orgLogIn", organization)
         .then(res => {
             console.log(res.data);
-            navigate('/');
+            navigate('/orgs/dashboard');
         })
         .catch(err => {
             console.log(err.response.data.errors.name.message);

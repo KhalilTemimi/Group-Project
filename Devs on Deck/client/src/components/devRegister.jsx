@@ -25,12 +25,16 @@ const DevRegister = () => {
         axios.post("http://localhost:8000/api/register", newDeveloper)
         .then(res => {
             console.log(res.data);
-            navigate('/');
+            navigate('/devs/dashboard');
         })
         .catch(err => {
-            console.log(err.response.data.errors.name.message);
-            const errArr = [];
-            errArr.push(err.response.data.errors.name.message);
+            const errorRes = err.response.data.errors;
+            console.log(errorRes)
+            const errArr=[];
+            for (const key of Object.keys(errorRes)){
+                console.log(errorRes[key].message)
+                errArr.push(errorRes[key].message)
+            }
             setErrors(errArr);
         })
     }

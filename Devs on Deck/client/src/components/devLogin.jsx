@@ -18,7 +18,7 @@ const DevLogin = () => {
         axios.post("http://localhost:8000/api/logIn", developer)
         .then(res => {
             console.log(res.data);
-            navigate('/');
+            navigate('/devs/dashboard');
         })
         .catch(err => {
             console.log(err.response.data.errors.name.message);

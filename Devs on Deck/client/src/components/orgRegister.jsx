@@ -10,7 +10,6 @@ const OrgRegister = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [org, setOrg] = useState({
-
     orgCity:"",
     orgAdress:"",
     orgState:""
@@ -29,10 +28,10 @@ const OrgRegister = () => {
             org,
             Password
         }
-        axios.post("http://localhost:8000/api/register", newOrganization)
+        axios.post("http://localhost:8000/api/orgRegister", newOrganization)
         .then(res => {
-            console.log(res.data);
-            navigate('/');
+            // console.log(res.data);
+            navigate('/orgs/dashboard');
         })
         .catch(err => {
             console.log(err.response.data.errors.name.message);
