@@ -18,6 +18,10 @@ body {
   color: #f2f2f2;
   text-decoration: none;
 }
+.square{
+  width: 300px;
+  height: 200px;
+}
 
 .topnav Link:hover {
   color: black;
@@ -27,5 +31,5 @@ body {
 .topnav .split {
   float: right;
   color: white;
-  margin-left: 30px;
+  margin-right: 30px;
 }
