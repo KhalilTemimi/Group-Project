@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+
 import './App.css';
+import{Routes, Route} from 'react-router-dom';
+import DevRegister from './components/devRegister';
+import OrgRegister from './components/orgRegister';
+import AddPosition from './components/addPosition';
+import AddSkills from './components/addSkills';
+import DevDashboard from './components/devDashboard';
+import DevLogin from './components/devLogin';
+import JobAvailability from './components/jobAvailability';
+import OrgDashboard from './components/orgDashboard';
+import OrgLogin from './components/orgLogin';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path='/' element={<DevRegister/>}/>
+        <Route path='/orgs/register' element={<OrgRegister/>}/>
+        <Route path='/orgs/login' element={<OrgLogin/>}/>
+        <Route path='/devs/login' element={<DevLogin/>}/>
+        <Route path='/devs/dashboard' element={<DevDashboard/>}/>
+        <Route path='/orgs/dashboard' element={<OrgDashboard/>}/>
+        <Route path='/orgs/job/:id' element={<JobAvailability/>}/>
+        <Route path='/devs/skills/frameworks' element={<AddSkills/>}/>
+        <Route path='/orgs/jobs/new' element={<AddPosition/>}/>
+      </Routes>
     </div>
   );
 }
