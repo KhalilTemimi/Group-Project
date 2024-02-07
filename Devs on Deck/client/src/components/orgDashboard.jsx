@@ -12,7 +12,6 @@ const OrgDashboard = () => {
   const { id } = useParams()
   const [devs, setDevs] = useState([])
   const [org, setOrg] = useState(null)
-  console.log(org)
   const getDevs = async () => {
     try {
       const res = await axios.get('http://localhost:3001/api/getAll', { withCredentials: true })
@@ -44,7 +43,7 @@ const OrgDashboard = () => {
       </div>
       <Stack justifyContent="center" direction="row" spacing={2}>
         <div>
-          <Link to={("/orgs/jobs/new")}>
+          <Link to={(`/orgs/jobs/new/${id}`)}>
             <Button variant='contained' color='info' >List a New Position</Button>
           </Link>
           <Card style={{ width: '18rem' }}>
@@ -53,18 +52,19 @@ const OrgDashboard = () => {
 
               {org !== null && (
                 org.positions.length > 0 ? (
-                  org.positions.map((position, idx) => (
-                    <Card.Link key={idx} href="#">
-                      {position._id}
-                    </Card.Link>
-                  ))
+                  <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                    {org.positions.map((position, idx) => (
+                      <Card.Link key={idx} href="#" style={{ fontSize: "20px", textTransform: 'upperCase' }}>
+                        {position.name}
+                      </Card.Link>
+                    ))}
+                  </div>
                 ) : (
                   <h2>
                     No Positions Available
                   </h2>
                 )
               )}
-
 
             </Card.Body>
           </Card>

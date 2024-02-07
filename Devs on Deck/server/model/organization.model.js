@@ -64,4 +64,17 @@ orgSchema.statics.login = async function (email, password) {
 
 }
 
+orgSchema.statics.getPositionArray = async function (newPositionn, id) {
+    const resultArray = await this.find({ _id: id })
+
+    if(resultArray) {
+        return resultArray[0]
+    }else {
+        throw new Error('Not Found')
+    }
+    
+
+
+}
+
 module.exports = mongoose.model("organization", orgSchema)

@@ -24,7 +24,7 @@ function App() {
         <Route path='/orgs/dashboard/:id' element={<OrgDashboard />} />
         <Route path='/orgs/job/:id' element={<JobAvailability />} />
         <Route path='/devs/skills/frameworks' element={<AddSkills />} />
-        <Route path='/orgs/jobs/new' element={<AddPosition />} />
+        <Route path='/orgs/jobs/new/:id' element={<AddPosition />} />
       </Routes>
     </div>
   );
