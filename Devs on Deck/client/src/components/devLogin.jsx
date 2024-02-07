@@ -15,24 +15,24 @@ const DevLogin = () => {
             email,
             Password
         }
-        axios.post("http://localhost:8000/api/logIn", developer)
+        axios.post("http://localhost:3001/api/login", developer)
         .then(res => {
-            console.log(res.data);
+            console.log(res);
             navigate('/devs/dashboard');
         })
         .catch(err => {
-            console.log(err.response.data.errors.name.message);
+            console.log(err);
             const errArr = [];
-            errArr.push(err.response.data.errors.name.message);
+            // errArr.push(err.response.data.errors.name.message);
             setErrors(errArr);
         })
     }
   return (
     <div>
-    <div class="topnav">
-      <Link class="active">DevsOnDeck</Link>
+    <div className="topnav">
+      <Link className="active">DevsOnDeck</Link>
       <Link to={("/")} class="split">Dev Registration</Link>
-      <Link to={("/orgs/register")} class="split">Orgs Registration</Link>
+      <Link to={("/orgs/register")} className="split">Orgs Registration</Link>
   </div>
         <h1>Welcome Back, Developer!</h1>
         <h3>Let's connect You To A Job!</h3>

@@ -28,24 +28,28 @@ const OrgRegister = () => {
             org,
             Password
         }
-        axios.post("http://localhost:8000/api/orgRegister", newOrganization)
+        axios.post("http://localhost:3001/api/orgRegister", newOrganization)
         .then(res => {
             // console.log(res.data);
             navigate('/orgs/dashboard');
         })
         .catch(err => {
-            console.log(err.response.data.errors.name.message);
-            const errArr = [];
-            errArr.push(err.response.data.errors.name.message);
-            setErrors(errArr);
+          const errorRes = err.response.data.errors;
+          console.log(errorRes)
+          const errArr=[];
+          for (const key of Object.keys(errorRes)){
+              console.log(errorRes[key].message)
+              errArr.push(errorRes[key].message)
+          }
+          setErrors(errArr);
         })
     }
   return (
     <div>
-    <div class="topnav">
-      <Link class="active">DevsOnDeck</Link>
-      <Link to={("/devs/login")} class="split">Dev Login</Link>
-      <Link to={("/orgs/login")} class="split">Orgs Login</Link>
+    <div className="topnav">
+      <Link className="active">DevsOnDeck</Link>
+      <Link to={("/devs/login")} className="split">Dev Login</Link>
+      <Link to={("/orgs/login")} className="split">Orgs Login</Link>
   </div>
         <h1>Organization Sign Up</h1>
             {

@@ -41,17 +41,21 @@ const AddPosition = () => {
         navigate('/orgs/dashboard');
       })
       .catch(err => {
-        console.log(err.response.data.errors.name.message);
-        const errArr = [];
-        errArr.push(err.response.data.errors.name.message);
+        const errorRes = err.response.data.errors;
+        console.log(errorRes)
+        const errArr=[];
+        for (const key of Object.keys(errorRes)){
+            console.log(errorRes[key].message)
+            errArr.push(errorRes[key].message)
+        }
         setErrors(errArr);
       })
   }
   return (
     <div>
-      <div class="topnav">
-      <Link class="active">DevsOnDeck</Link>
-      <Link to={("/orgs/login")} class="split">Log Out</Link>
+      <div className="topnav">
+      <Link className="active">DevsOnDeck</Link>
+      <Link to={("/orgs/login")} className="split">Log Out</Link>
     </div>
       <h1>Add A position</h1>
       {

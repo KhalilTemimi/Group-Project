@@ -8,9 +8,9 @@ import ListGroup from 'react-bootstrap/ListGroup';
 const OrgDashboard = () => {
   return (
     <div>
-      <div class="topnav">
-        <Link class="active">DevsOnDeck</Link>
-        <Link to={("/orgs/login")} class="split">Log Out</Link>
+      <div className="topnav">
+        <Link className="active">DevsOnDeck</Link>
+        <Link to={("/orgs/login")} className="split">Log Out</Link>
       </div>
       <Stack justifyContent="center" direction="row" spacing={2}>
         <div>

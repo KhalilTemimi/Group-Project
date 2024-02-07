@@ -31,9 +31,9 @@ const DevDashboard = () => {
   }
   return (
     <div>
-      <div class="topnav">
-        <Link class="active">DevsOnDeck</Link>
-        <Link to={("/devs/login")} class="split">Log Out</Link>
+      <div className="topnav">
+        <Link className="active">DevsOnDeck</Link>
+        <Link to={("/devs/login")} className="split">Log Out</Link>
       </div>
       <h1>Add Your Skills</h1>
       <Stack justifyContent="center" direction="row" spacing={2}>

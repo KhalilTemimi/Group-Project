@@ -13,7 +13,7 @@ const AddSkills = () => {
         const skills={
             skills
         }
-        axios.post("http://localhost:8000/api/addSkills", skills)
+        axios.patch("http://localhost:3001/api/addSkill/:id", skills)
         .then(res => {
             console.log(res.data);
             navigate('/');
@@ -31,9 +31,9 @@ const AddSkills = () => {
     }
   return (
     <div>
-      <div class="topnav">
-      <Link class="active">DevsOnDeck</Link>
-      <Link to={("/devs/login")} class="split">Log Out</Link>
+      <div className="topnav">
+      <Link className="active">DevsOnDeck</Link>
+      <Link to={("/devs/login")} className="split">Log Out</Link>
     </div>
       <h1>Add Your Skills</h1>
       <Stack justifyContent="center" direction="row" spacing={2}>

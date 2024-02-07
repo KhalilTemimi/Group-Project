@@ -9,8 +9,8 @@ const DevRegister = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [city, setCity] = useState("");
-  const [Password, setPassword] = useState("");
-  const [cofirmPassword, setConfirmPassword] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState([]);
     const navigate = useNavigate();
     const submitHandler = (e) =>{
@@ -20,30 +20,23 @@ const DevRegister = () => {
             lastName,
             email,
             city,
-            Password
+            password
         }
-        axios.post("http://localhost:8000/api/register", newDeveloper)
+        axios.post("http://localhost:3001/api/register", newDeveloper, {withCredentials:true})
         .then(res => {
-            console.log(res.data);
+             console.log(res);
             navigate('/devs/dashboard');
         })
         .catch(err => {
-            const errorRes = err.response.data.errors;
-            console.log(errorRes)
-            const errArr=[];
-            for (const key of Object.keys(errorRes)){
-                console.log(errorRes[key].message)
-                errArr.push(errorRes[key].message)
-            }
-            setErrors(errArr);
+           console.log("errors");
         })
     }
   return (
   <div>
-    <div class="topnav">
-      <Link class="active">DevsOnDeck</Link>
-      <Link to={("/devs/login")} class="split">Dev Login</Link>
-      <Link to={("/orgs/login")} class="split">Orgs Login</Link>
+    <div className="topnav">
+      <Link className="active">DevsOnDeck</Link>
+      <Link to={("/devs/login")} className="split">Dev Login</Link>
+      <Link to={("/orgs/login")} className="split">Orgs Login</Link>
   </div>
         <h1>Developer Sign Up</h1>
             {
@@ -54,12 +47,12 @@ const DevRegister = () => {
                 })
             }
             <form onSubmit={submitHandler}>
-                <TextField label="First Name" variant='outlined' sx={{m:1, width:500}} onChange={(e)=>{setFirstName(e.target.value)}}/><br/>
-                <TextField label="Last Name" variant='outlined' sx={{m:1, width:500}} onChange={(e)=>{setLastName(e.target.value)}}/><br/>
-                <TextField label="Email" variant='outlined' sx={{m:1, width:500}} onChange={(e)=>{setEmail(e.target.value)}}/><br/>
-                <TextField label="City" variant='outlined' sx={{m:1, width:500}} onChange={(e)=>{setCity(e.target.value)}}/><br/>
-                <TextField label="Password" variant='outlined' sx={{m:1, width:500}} onChange={(e)=>{setPassword(e.target.value)}}/><br/>
-                <TextField label="Confirm" variant='outlined' sx={{m:1, width:500}} onChange={(e)=>{setConfirmPassword(e.target.value)}}/><br/>
+                <TextField label="First Name" value={firstName} variant='outlined' sx={{m:1, width:500}} onChange={(e)=>{setFirstName(e.target.value)}}/><br/>
+                <TextField label="Last Name" value={lastName} variant='outlined' sx={{m:1, width:500}} onChange={(e)=>{setLastName(e.target.value)}}/><br/>
+                <TextField label="Email" value={email} variant='outlined' sx={{m:1, width:500}} onChange={(e)=>{setEmail(e.target.value)}}/><br/>
+                <TextField label="City" value={city} variant='outlined' sx={{m:1, width:500}} onChange={(e)=>{setCity(e.target.value)}}/><br/>
+                <TextField label="Password" value={password} variant='outlined' sx={{m:1, width:500}} onChange={(e)=>{setPassword(e.target.value)}}/><br/>
+                <TextField label="Confirm" value={confirmPassword} variant='outlined' sx={{m:1, width:500}} onChange={(e)=>{setConfirmPassword(e.target.value)}}/><br/>
                 <Button variant='contained' color='success' sx={{m:1}} type="submit">Register</Button><br/><br/>
                 <Link to={("/orgs/register")}>Nee to Sign Up an Organization?</Link>
             </form>

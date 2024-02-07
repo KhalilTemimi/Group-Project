@@ -15,7 +15,7 @@ const OrgLogin = () => {
             email,
             Password
         }
-        axios.post("http://localhost:8000/api/orgLogIn", organization)
+        axios.post("http://localhost:3001/api/orgLogIn", organization)
         .then(res => {
             console.log(res.data);
             navigate('/orgs/dashboard');
@@ -29,10 +29,10 @@ const OrgLogin = () => {
     }
   return (
     <div>
-    <div class="topnav">
-      <Link class="active">DevsOnDeck</Link>
-      <Link to={("/")} class="split">Dev Registration</Link>
-      <Link to={("/orgs/register")} class="split">Orgs Registration</Link>
+    <div className="topnav">
+      <Link className="active">DevsOnDeck</Link>
+      <Link to={("/")} className="split">Dev Registration</Link>
+      <Link to={("/orgs/register")} className="split">Orgs Registration</Link>
   </div>
         <h1>Welcome Back!</h1>
         <h3>Let's find you Some Candidates!</h3>
