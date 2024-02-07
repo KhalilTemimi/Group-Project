@@ -11,3 +11,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.skill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+}
+
+.all-skills {
+  background: #0288d1;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  margin-bottom: 20px;
+  padding: 20px;
+  flex-wrap: wrap;
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+}

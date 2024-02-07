@@ -1,36 +1,40 @@
 const mongoose = require('mongoose')
-const { isEmail } = require('validator')
 const orgSchema = new mongoose.Schema({
     orgName: {
         type: String,
         required: [true, "Organization name is required"]
-    }, firstName: {
+    },
+    firstName: {
         type: String,
         required: [true, 'First name is required']
-    }
-    , lastName: {
+    },
+    lastName: {
         type: String,
         required: [true, 'Last name is Required']
-    }
-    , email: {
+    },
+    email: {
         type: String,
         required: [true, "The Email Name is Required"],
         unique: true,
         lowercase: true,
-        validator: [isEmail, 'Please enter a valid email']
-    }, org: {
+    },
+    org: {
         orgCity: {
             type: String
-        }, orgAdress: {
+        },
+        orgAddress: {  // Corrected typo in property name
             type: String,
-        }, orgState: {
+        },
+        orgState: {
             type: String
         }
-    }, password: {
+    },
+    password: {
         type: String,
         required: [true, 'The Password is Required'],
-        minlegth: [6, 'Password must be at least 6 characters long']
-    }, positions: {
+        minlength: [6, 'Password must be at least 6 characters long']
+    },
+    positions: [{
         name: {
             type: String
         },
@@ -41,7 +45,8 @@ const orgSchema = new mongoose.Schema({
             type: Array
         }
     }
-})
+    ]
+});
 
 orgSchema.statics.login = async function (email, password) {
 

@@ -5,7 +5,6 @@ module.exports.register = async (req, res) => {
 
     try {
         const dev = await developer.create(req.body)
-        console.log(dev)
         res.status(200).json(dev)
     } catch (err) {
         const errors = HandleErrors(err)
@@ -34,7 +33,6 @@ module.exports.addSkills = async (req, res) => {
         res.status(200).json(newDev)
     } catch (err) {
         res.status(400).json("An Error Occured")
-        console.log("first")
     }
 }
 
@@ -48,6 +46,20 @@ module.exports.findDev = async (req, res) => {
         res.json(dev)
     } catch (err) {
         res.json({ error: "Developer Not Found" })
+    }
+
+}
+
+
+//get all devs 
+
+module.exports.getAllDevs = async (req, res) => {
+
+    try {
+        const devs = await developer.find()
+        res.status(200).json(devs)
+    } catch (err) {
+        res.status(400).json(err)
     }
 
 }

@@ -1,6 +1,6 @@
 
 import './App.css';
-import{Routes, Route} from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import DevRegister from './components/devRegister';
 import OrgRegister from './components/orgRegister';
 import AddPosition from './components/addPosition';
@@ -16,15 +16,15 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path='/' element={<DevRegister/>}/>
-        <Route path='/orgs/register' element={<OrgRegister/>}/>
-        <Route path='/orgs/login' element={<OrgLogin/>}/>
-        <Route path='/devs/login' element={<DevLogin/>}/>
-        <Route path='/devs/dashboard' element={<DevDashboard/>}/>
-        <Route path='/orgs/dashboard' element={<OrgDashboard/>}/>
-        <Route path='/orgs/job/:id' element={<JobAvailability/>}/>
-        <Route path='/devs/skills/frameworks' element={<AddSkills/>}/>
-        <Route path='/orgs/jobs/new' element={<AddPosition/>}/>
+        <Route path='/' element={<DevRegister />} />
+        <Route path='/orgs/register' element={<OrgRegister />} />
+        <Route path='/orgs/login' element={<OrgLogin />} />
+        <Route path='/devs/login' element={<DevLogin />} />
+        <Route path='/devs/dashboard' element={<DevDashboard />} />
+        <Route path='/orgs/dashboard/:id' element={<OrgDashboard />} />
+        <Route path='/orgs/job/:id' element={<JobAvailability />} />
+        <Route path='/devs/skills/frameworks' element={<AddSkills />} />
+        <Route path='/orgs/jobs/new' element={<AddPosition />} />
       </Routes>
     </div>
   );

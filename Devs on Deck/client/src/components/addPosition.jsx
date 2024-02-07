@@ -38,7 +38,7 @@ const AddPosition = () => {
     axios.post("http://localhost:8000/api/addPosition", newPosition,{withCredentials:true})
       .then(res => {
         console.log(res.data);
-        navigate('/orgs/dashboard');
+        //navigate('/orgs/dashboard');
       })
       .catch(err => {
         const errorRes = err.response.data.errors;
