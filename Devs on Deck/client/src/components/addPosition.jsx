@@ -35,7 +35,7 @@ const AddPosition = () => {
       description,
       skills
     }
-    axios.post("http://localhost:8000/api/addPosition", newPosition)
+    axios.post("http://localhost:8000/api/addPosition", newPosition,{withCredentials:true})
       .then(res => {
         console.log(res.data);
         navigate('/orgs/dashboard');

@@ -34,3 +34,7 @@ body {
   color: white;
   margin-right: 30px;
 }
+
+.error {
+  color: red;
+}

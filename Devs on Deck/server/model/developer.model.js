@@ -1,26 +1,29 @@
 const mongoose = require('mongoose')
-const { isEmail } = require('validator')
 
 const developerSchema = new mongoose.Schema({
     firstName: {
         type: String,
         required: [true, "The First Name Is Required"]
-    }, lastName: {
+    },
+    lastName: {
         type: String,
         required: [true, "The Last Name Is Required"]
-    }, email: {
+    },
+    email: {
         type: String,
         required: [true, "The Email Name Is Required"],
         unique: true,
         lowercase: true,
-        validator: [isEmail, 'Please enter a valid email']
-    }, city: {
+    },
+    city: {
         type: String,
-    }, password: {
+    },
+    password: {
         type: String,
         required: [true, "The Password Name Is Required"],
-        minlegth: [6, 'Password must be at least 6 characters long']
-    }, skills: {
+        minlength: [6, 'Password must be at least 6 characters long']
+    },
+    skills: {
         type: Array
     }
 })

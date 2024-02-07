@@ -28,7 +28,7 @@ const OrgRegister = () => {
             org,
             Password
         }
-        axios.post("http://localhost:3001/api/orgRegister", newOrganization)
+        axios.post("http://localhost:3001/api/orgRegister", newOrganization,{withCredentials:true})
         .then(res => {
             // console.log(res.data);
             navigate('/orgs/dashboard');

@@ -2,12 +2,14 @@ const developer = require('../model/developer.model')
 const { HandleErrors } = require('./errorHandler')
 
 module.exports.register = async (req, res) => {
+
     try {
         const dev = await developer.create(req.body)
+        console.log(dev)
         res.status(200).json(dev)
     } catch (err) {
         const errors = HandleErrors(err)
-        res.json(errors)
+        res.status(400).json(errors)
     }
 }
 

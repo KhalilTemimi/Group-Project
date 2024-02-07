@@ -15,7 +15,7 @@ const OrgLogin = () => {
             email,
             Password
         }
-        axios.post("http://localhost:3001/api/orgLogIn", organization)
+        axios.post("http://localhost:3001/api/orgLogIn", organization,{withCredentials:true})
         .then(res => {
             console.log(res.data);
             navigate('/orgs/dashboard');

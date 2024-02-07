@@ -13,7 +13,7 @@ const DevDashboard = () => {
     const skills = {
       skills
     }
-    axios.post("http://localhost:8000/api/addSkills", skills)
+    axios.post("http://localhost:8000/api/addSkills", skills,{withCredentials:true})
       .then(res => {
         console.log(res.data);
         navigate('/');

@@ -13,7 +13,7 @@ const AddSkills = () => {
         const skills={
             skills
         }
-        axios.patch("http://localhost:3001/api/addSkill/:id", skills)
+        axios.patch("http://localhost:3001/api/addSkill/:id", skills,{withCredentials:true})
         .then(res => {
             console.log(res.data);
             navigate('/');
