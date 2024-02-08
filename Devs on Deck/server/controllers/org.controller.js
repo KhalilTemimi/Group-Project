@@ -19,7 +19,7 @@ module.exports.login = async (req, res) => {
         res.json(org)
     } catch (err) {
         const errors = HandleErrors(err)
-        res.json(errors)
+        res.status(400).json(errors)
     }
 }
 

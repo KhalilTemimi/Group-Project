@@ -1,7 +1,8 @@
 const HandleErrors = (err) => {
+    console.log(err.message)
     let errors = { email: "", password: "", fields: "" }
 
-    if (err.message === "All fields must be filled") {
+    if (err.message === "All fields must be filled" || err.message==="All fields are required") {
         errors.fields = err.message
     }
 
