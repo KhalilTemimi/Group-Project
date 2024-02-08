@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from "@mui/material/Button";
 import Stack from '@mui/material/Stack';
 import Card from 'react-bootstrap/Card';
@@ -12,6 +12,7 @@ const OrgDashboard = () => {
   const { id } = useParams()
   const [devs, setDevs] = useState([])
   const [org, setOrg] = useState(null)
+  const navigate = useNavigate()
   const getDevs = async () => {
     try {
       const res = await axios.get('http://localhost:3001/api/getAll', { withCredentials: true })
@@ -35,6 +36,14 @@ const OrgDashboard = () => {
     getDevs()
     getOneOrg()
   }, [])
+
+  const HandeClick = (skills) => {
+    navigate(`/orgs/job/${id}`, {
+      state: {
+        skills: skills
+      }
+    })
+  }
   return (
     <div>
       <div className="topnav">
@@ -54,9 +63,13 @@ const OrgDashboard = () => {
                 org.positions.length > 0 ? (
                   <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                     {org.positions.map((position, idx) => (
-                      <Card.Link key={idx} href="#" style={{ fontSize: "20px", textTransform: 'upperCase' }}>
+                      <button key={idx} onClick={() => HandeClick(position.skills)}
+                        style={{
+                          fontSize: "20px", textTransform: 'upperCase',
+                          backgroundColor: 'transparent', border: 'none', cursor: "pointer", color: "blue", textDecoration: 'underline'
+                        }}>
                         {position.name}
-                      </Card.Link>
+                      </button>
                     ))}
                   </div>
                 ) : (
