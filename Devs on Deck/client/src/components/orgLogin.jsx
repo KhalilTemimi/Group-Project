@@ -6,14 +6,14 @@ import TextField from '@mui/material/TextField';
 
 const OrgLogin = () => {
   const [email, setEmail] = useState("");
-  const [Password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({emailError:'', passwordError:''});
     const navigate = useNavigate();
     const submitHandler = (e) =>{
         e.preventDefault();
         const organization={
             email,
-            Password
+            password
         }
         axios.post("http://localhost:3001/api/orgLogIn", organization,{withCredentials:true})
         .then(res => {
@@ -21,10 +21,12 @@ const OrgLogin = () => {
             navigate('/orgs/dashboard');
         })
         .catch(err => {
-            console.log(err.response.data.errors.name.message);
-            const errArr = [];
-            errArr.push(err.response.data.errors.name.message);
-            setErrors(errArr);
+            const error = err.response.data
+            console.log(error)
+            setErrors(prev => ({
+                ...prev, ["emailError"]: error.email,
+                ['passwordError']: error.password
+            }))
         })
     }
   return (
@@ -36,17 +38,12 @@ const OrgLogin = () => {
   </div>
         <h1>Welcome Back!</h1>
         <h3>Let's find you Some Candidates!</h3>
-            {
-                errors.map((err, index)=>{
-                    return(
-                        <p key={index} style={{color:"red"}} >{err}</p>
-                    )
-                })
-            }
+            <h4 className='error'>{errors.emailError}</h4>
+            <h4 className='error'>{errors.passwordError}</h4>
             <form onSubmit={submitHandler}>
             
                 <TextField label="Email" variant='outlined' sx={{m:1, width:500}} onChange={(e)=>{setEmail(e.target.value)}}/><br/>
-                <TextField label="Password" variant='outlined' sx={{m:1, width:500}} onChange={(e)=>{setPassword(e.target.value)}}/><br/>
+                <TextField label="Password" type='password' variant='outlined' sx={{m:1, width:500}} onChange={(e)=>{setPassword(e.target.value)}}/><br/>
                 <Button variant='contained' color='success' sx={{m:1}} type="submit">Log In</Button><br/><br/>
             </form>
     </div>

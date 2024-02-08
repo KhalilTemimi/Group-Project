@@ -22,15 +22,16 @@ module.exports.login = async (req, res) => {
         res.json(dev)
     } catch (err) {
         const errors = HandleErrors(err)
-        res.json(errors)
+        res.status(400).json(errors)
     }
 }
 
 module.exports.addSkills = async (req, res) => {
-    const { skills } = req.body
+    const { skills, bio } = req.body
     const { id } = req.params
     try {
-        const newDev = await developer.findOneAndUpdate({ _id: id }, { skills: skills }, { new: true, runValidators: true })
+        const newDev = await developer.findOneAndUpdate({ _id: id }, { skills: skills },
+                                        {bio: bio}, { new: true, runValidators: true })
         res.status(200).json(newDev)
     } catch (err) {
         res.status(400).json("An Error Occured")
@@ -50,4 +51,17 @@ module.exports.findDev = async (req, res) => {
         res.json({ error: "Developer Not Found" })
     }
 
+}
+
+// get all developers
+module.exports.getAllDevelopers = (req, res) => {
+    developer.find({})
+        .then(Developers => {
+            console.log(Developers);
+            res.json(Developers);
+        })
+        .catch(err => {
+            console.log(err)
+            res.json(err)
+        })
 }
