@@ -26,12 +26,25 @@ module.exports.login = async (req, res) => {
     }
 }
 
-module.exports.addSkills = async (req, res) => {
+module.exports.addSkillsBio = async (req, res) => {
     const { skills, bio } = req.body
     const { id } = req.params
     try {
         const newDev = await developer.findOneAndUpdate({ _id: id }, { skills: skills },
                                         {bio: bio}, { new: true, runValidators: true })
+        res.status(200).json(newDev)
+    } catch (err) {
+        res.status(400).json("An Error Occured")
+        console.log("first")
+    }
+}
+
+module.exports.addSkills = async (req, res) => {
+    const { skills} = req.body
+    const { id } = req.params
+    try {
+        const newDev = await developer.findOneAndUpdate({ _id: id }, { skills: skills },
+                                        { new: true, runValidators: true })
         res.status(200).json(newDev)
     } catch (err) {
         res.status(400).json("An Error Occured")

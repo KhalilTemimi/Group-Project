@@ -29,7 +29,7 @@ const AddSkills = (props) => {
     axios.patch("http://localhost:3001/api/addSkill/"+id, newSkills, { withCredentials: true })
       .then(res => {
         console.log(res.data);
-        navigate('/');
+        navigate('/devs/dashboard');
       })
       .catch(err => {
         const errorRes = err.response.data.errors;
