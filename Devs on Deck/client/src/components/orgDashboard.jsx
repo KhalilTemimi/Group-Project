@@ -37,10 +37,11 @@ const OrgDashboard = () => {
     getOneOrg()
   }, [])
 
-  const HandeClick = (skills) => {
+  const HandeClick = (position) => {
     navigate(`/orgs/job/${id}`, {
       state: {
-        skills: skills
+        skills: position.skills,
+        position: position.name
       }
     })
   }
@@ -63,7 +64,7 @@ const OrgDashboard = () => {
                 org.positions.length > 0 ? (
                   <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                     {org.positions.map((position, idx) => (
-                      <button key={idx} onClick={() => HandeClick(position.skills)}
+                      <button key={idx} onClick={() => HandeClick(position)}
                         style={{
                           fontSize: "20px", textTransform: 'upperCase',
                           backgroundColor: 'transparent', border: 'none', cursor: "pointer", color: "blue", textDecoration: 'underline'

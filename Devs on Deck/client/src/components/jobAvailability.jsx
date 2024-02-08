@@ -1,11 +1,34 @@
-import { useLocation } from "react-router-dom";
-
+import { useEffect, useState } from "react";
+import { useLocation, Link } from "react-router-dom";
 const JobAvailability = () => {
   const location = useLocation()
-  const { skills } = location.state
-  console.log(skills)
+  const { skills, position } = location.state
+  const [devs, setDevs] = useState(null)
+  const fetchDevs = () => {
+    //fetch for developers
+  }
+
+  useEffect(() => {
+    fetchDevs()
+  }, [])
   return (
-    <div></div>
+    <div>
+      <div className="topnav">
+        <Link className="active">DevsOnDeck</Link>
+        <Link to={("/orgs/login")} className="split">Log Out</Link>
+      </div>
+      <div className="title">
+        <h1>
+          {position}
+        </h1>
+      </div>
+
+      <div>
+        <div className="available">
+          <h1>Available Devs</h1>
+        </div>
+      </div>
+    </div>
   )
 }
 
