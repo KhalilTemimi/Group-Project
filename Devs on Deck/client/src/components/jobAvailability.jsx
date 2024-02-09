@@ -34,9 +34,17 @@ const JobAvailability = () => {
                 {
                   dev.skills.map((skill, i) => (
                     <li key={i}>{skill}</li>
-                    ))
+                  ))
                 }</ul>
-            </div>
+
+              <div className="match"
+                style={dev.percentage > 70 ? { backgroundColor: "#008000" } :
+                  dev.percentage > 40 && dev.percentage < 70 ? { backgroundColor: "#ffb700" } :
+                    { backgroundColor: "#ff2600" }}>
+
+                {dev.percentage}% MATCH
+              </div>
+            </div >
           ))
         }
       </>

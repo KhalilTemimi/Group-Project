@@ -45,14 +45,26 @@ developerSchema.statics.login = async function (email, password) {
 const containArray = (skills, resSkills) => {
     skills = skills.map(skill => String(skill).toUpperCase());
     resSkills = resSkills.map(skill => String(skill).toUpperCase());
-    return resSkills.some(skill => skills.includes(skill));
+    let matching = 0;
+    resSkills.forEach(skill => {
+        if (skills.includes(skill)) { matching += 1 }
+    })
+    return matching
 }
 
 developerSchema.statics.getDev = async function (skills) {
 
     const resultArray = await this.find()
-    const filteredArr = resultArray.filter(res => {
-        return containArray(skills, res.skills)
+    const filteredArr = []
+    resultArray.forEach(resArr => {
+        const matching = containArray(skills, resArr.skills)
+        if (matching > 0) {
+            let percentage = (matching / resArr.skills.length) * 100 // getting the match percentage
+
+            const { firstName, lastName, _id, skills } = resArr
+            let finalRes = { firstName, lastName, _id, percentage, skills };
+            filteredArr.push(finalRes);
+        }
     })
     if (filteredArr.length > 0) return filteredArr
 
