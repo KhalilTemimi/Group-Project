@@ -43,6 +43,8 @@ developerSchema.statics.login = async function (email, password) {
 }
 
 const containArray = (skills, resSkills) => {
+    skills = skills.map(skill => String(skill).toUpperCase());
+    resSkills = resSkills.map(skill => String(skill).toUpperCase());
     return resSkills.some(skill => skills.includes(skill));
 }
 

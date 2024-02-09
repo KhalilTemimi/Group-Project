@@ -43,9 +43,9 @@ module.exports.findDev = async (req, res) => {
     const { skills } = req.body
     try {
         const dev = await developer.getDev(skills)
-        res.json(dev)
+        res.status(200).json(dev)
     } catch (err) {
-        res.json({ error: "Developer Not Found" })
+        res.status(404).json({ error: "Developer Not Found" })
     }
 
 }

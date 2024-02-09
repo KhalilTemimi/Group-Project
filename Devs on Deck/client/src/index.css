@@ -72,3 +72,22 @@ code {
   align-items: center;
   justify-content: center;
 }
+
+.dev-container {
+  padding: 10px 20px;
+  margin: 30px auto;
+  width: 80%;
+  background-color: #0288d1;
+  color: white;
+}
+
+.dev-list {
+  font-weight: bold;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
