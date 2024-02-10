@@ -52,7 +52,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-<<<<<<< HEAD
 
 .skill {
   display: flex;
@@ -156,11 +155,4 @@ button.selected {
   top: 0;
   right: 0;
   color: black;
-=======
-.card {
-  background: var(--surface-card);
-  padding: 2rem;
-  border-radius: 10px;
-  margin-bottom: 1rem;
->>>>>>> d75fde3d6f0c72ddb8b0734df569980a165cd785
 }

@@ -20,7 +20,6 @@ module.exports.login = async (req, res) => {
     } catch (err) {
         const errors = HandleErrors(err)
         res.status(400).json(errors)
-<<<<<<< HEAD
     }
 }
 
@@ -47,7 +46,5 @@ module.exports.addPosition = async (req, res) => {
         res.status(200).json(org)
     } catch (err) {
         res.status(400).json(err)
-=======
->>>>>>> d75fde3d6f0c72ddb8b0734df569980a165cd785
     }
 }

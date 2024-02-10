@@ -26,13 +26,8 @@ const developerSchema = new mongoose.Schema({
     skills: {
         type: Array
     },
-<<<<<<< HEAD
     bio: {
         type: String
-=======
-    bio:{
-        type: String,
->>>>>>> d75fde3d6f0c72ddb8b0734df569980a165cd785
     }
 })
 

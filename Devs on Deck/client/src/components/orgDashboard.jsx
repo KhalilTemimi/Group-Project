@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import Button from "@mui/material/Button";
@@ -46,31 +45,6 @@ const OrgDashboard = () => {
       }
     })
   }
-=======
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Link } from 'react-router-dom';
-import Button from "@mui/material/Button";
-import Stack from '@mui/material/Stack';
-import Card from 'react-bootstrap/Card';
-
-const OrgDashboard = () => {
-  const [developers, setDevelopers] = useState([]);
-  const [refreshState, setRefreshState] = useState(false);
-  const refresh = () => {
-    setRefreshState(!refreshState)
-  }
-  useEffect(() => {
-    axios.get("http://localhost:3001/api/developers")
-      .then(res => {
-        console.log(res.data)
-        setDevelopers(res.data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }, [refreshState]);
->>>>>>> d75fde3d6f0c72ddb8b0734df569980a165cd785
   return (
     <div>
       <div className="topnav">
@@ -82,12 +56,9 @@ const OrgDashboard = () => {
       </Link>
       <Stack justifyContent="center" direction="row" spacing={2}>
         <div>
-<<<<<<< HEAD
           <Link to={(`/orgs/jobs/new/${id}`)}>
             <Button variant='contained' color='info' >List a New Position</Button>
           </Link>
-=======
->>>>>>> d75fde3d6f0c72ddb8b0734df569980a165cd785
           <Card style={{ width: '18rem' }}>
             <Card.Body>
               <Card.Header as="h3">Positions To Fill</Card.Header>
@@ -120,7 +91,6 @@ const OrgDashboard = () => {
             <Card.Body>
               <Card.Header as="h3">Available Devs : </Card.Header>
             </Card.Body>
-<<<<<<< HEAD
 
             <ListGroup className="list-group-flush">
               {devs.length > 0 ? (
@@ -157,21 +127,6 @@ const OrgDashboard = () => {
                 <h1>No developers available</h1>
               )}
             </ListGroup>
-=======
-            {
-              developers.map((developer, index) => {
-                return (
-                  <div class="card" style={{ width: '18rem' }} key={index}>
-                    <div class="card-body">
-                      <h5 class="card-title">{developer.firstName} {developer.lastName}</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">{developer.skills}</h6>
-                      <p class="card-text">{developer.bio}</p>
-                    </div>
-                  </div>
-                )
-              })
-            }
->>>>>>> d75fde3d6f0c72ddb8b0734df569980a165cd785
           </Card>
         </div>
       </Stack >
