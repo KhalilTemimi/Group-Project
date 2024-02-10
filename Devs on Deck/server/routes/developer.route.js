@@ -5,4 +5,6 @@ module.exports = (app) => {
     app.post('/api/getDev', devControlelr.findDev)
     app.post('/api/addSkill/:id', devControlelr.addSkills)
     app.get('/api/getAll', devControlelr.getAllDevs)
+    app.get('/api/getAll', devControlelr.getAllDevs)
+    app.get('/api/getOneDev/:id', devControlelr.getOneDev)
 }

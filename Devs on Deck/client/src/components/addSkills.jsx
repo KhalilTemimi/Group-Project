@@ -1,74 +1,59 @@
-import React, { useState } from 'react'
-import axios from 'axios';
-import {Link, useNavigate} from 'react-router-dom';
-import Button from "@mui/material/Button";
-import Stack from '@mui/material/Stack';
+import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
+import SkillsStep from "./SkillsStep"
+import FrameworksStep from "./FrameworksStep"
 
 const AddSkills = () => {
   const [skills, setSkills] = useState([])
-  const [errors, setErrors] = useState([]);
-    const navigate = useNavigate();
-    const submitHandler = (e) =>{
-        e.preventDefault();
-        const skills={
-            skills
-        }
-        axios.patch("http://localhost:3001/api/addSkill/:id", skills,{withCredentials:true})
-        .then(res => {
-            console.log(res.data);
-            navigate('/');
-        })
-        .catch(err => {
-            const errorRes = err.response.data.errors;
-            console.log(errorRes)
-            const errArr=[];
-            for (const key of Object.keys(errorRes)){
-                console.log(errorRes[key].message)
-                errArr.push(errorRes[key].message)
-            }
-            setErrors(errArr);
-        })
+  const [bio, setBio] = useState("")
+  const [step, setStep] = useState('firstStep')
+
+  const HandleClick = (skip, back) => {
+    if (back) {
+      setStep('firstStep')
+      setSkills([])
+      setBio('')
+    } else {
+      if (skip) {
+        setSkills([])
+        setBio('')
+      }
+      setStep('lastStep')
     }
+
+  }
+  const handleDisplay = () => {
+
+
+    if (step === "firstStep") {
+      return <SkillsStep
+        skills={skills}
+        setSkills={setSkills}
+        setBio={setBio}
+        HandleClick={HandleClick}
+      />
+    }
+
+    return <FrameworksStep
+      skills={skills}
+      setSkills={setSkills}
+      bio={bio}
+      HandleClick={HandleClick}
+    />
+
+  }
   return (
     <div>
       <div className="topnav">
-      <Link className="active">DevsOnDeck</Link>
-      <Link to={("/devs/login")} className="split">Log Out</Link>
-    </div>
-      <h1>Add Your Skills</h1>
-      <Stack justifyContent="center" direction="row" spacing={2}>
-      <div>
-      <p>Pick Your Top 5 Frameworks Or Libraries</p>
-      <form onSubmit={submitHandler}>
-        <select className='square' name="skills" id="skills" multiple value={skills}
-        onChange={(e)=>{setSkills(e.target.value)}}>
-          <option value="Django">Django</option>
-          <option value="Flask">Flask</option>
-          <option value="Rails">Rails</option>
-          <option value="Spring">Spring</option>
-          <option value="JAVASCRIPT">JAVASCRIPT</option>
-          <option value="JAVA">JAVA</option>
-          <option value="C#">C#</option>
-          <option value="GO">GO</option>
-          <option value="PYTHON">PYTHON</option>
-        </select>
-        <br/><br/>
-        <input type="submit" value="Submit"></input>
-        </form>
+        <Link className="active">DevsOnDeck</Link>
+        <Link to={("/devs/login")} className="split">Dev Login</Link>
+        <Link to={("/orgs/login")} className="split">Orgs Login</Link>
       </div>
       <div>
-        <p>quotes</p>
-        <p className='square'>SOME INSPIRATIONAL QUOTES OR INFORMATION ABOUT WHY IT IS IMPORTANT
-        TO FINISH UP THE PROFILE. </p>
+        {handleDisplay()}
       </div>
-      </Stack>
-          <p>Hold down the Ctrl (windows) or Command (Mac) button to select multiple options.</p>
-    
-            <Link to={("/devs/dashboard")}>
-                <Button variant='contained' color='warning' >Complete Profile</Button>
-            </Link>
     </div>
   )
 }
 
-export default AddSkills;
+export default AddSkills

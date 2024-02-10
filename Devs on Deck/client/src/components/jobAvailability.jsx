@@ -4,14 +4,12 @@ import axios from 'axios'
 const JobAvailability = () => {
   const location = useLocation()
   const { skills, position } = location.state
-  console.log(skills)
   const [devs, setDevs] = useState(null)
   const fetchDevs = async () => {
     try {
 
       const res = await axios.post("http://localhost:3001/api/getDev", { skills: skills }, { withCredentials: true })
       setDevs(res.data)
-      console.log(res)
     } catch (err) {
       console.log(err)
     }
@@ -38,12 +36,19 @@ const JobAvailability = () => {
                 }</ul>
 
               <div className="match"
-                style={dev.percentage > 70 ? { backgroundColor: "#008000" } :
-                  dev.percentage > 40 && dev.percentage < 70 ? { backgroundColor: "#ffb700" } :
+                style={dev.percentage >= 60 ? { backgroundColor: "#008000" } :
+                  dev.percentage > 30 && dev.percentage < 60 ? { backgroundColor: "#ffb700" } :
                     { backgroundColor: "#ff2600" }}>
 
-                {dev.percentage}% MATCH
+                {dev.percentage.toFixed(1)}% MATCH
               </div>
+              {
+                dev.bio && (
+                  <h3 className="text-black">
+                    {dev.bio}
+                  </h3>
+                )
+              }
             </div >
           ))
         }

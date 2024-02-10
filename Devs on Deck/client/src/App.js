@@ -20,10 +20,10 @@ function App() {
         <Route path='/orgs/register' element={<OrgRegister />} />
         <Route path='/orgs/login' element={<OrgLogin />} />
         <Route path='/devs/login' element={<DevLogin />} />
-        <Route path='/devs/dashboard' element={<DevDashboard />} />
+        <Route path='/devs/dashboard/:id' element={<DevDashboard />} />
         <Route path='/orgs/dashboard/:id' element={<OrgDashboard />} />
         <Route path='/orgs/job/:id' element={<JobAvailability />} />
-        <Route path='/devs/skills/frameworks' element={<AddSkills />} />
+        <Route path='/devs/skills/:id' element={<AddSkills />} />
         <Route path='/orgs/jobs/new/:id' element={<AddPosition />} />
       </Routes>
     </div>

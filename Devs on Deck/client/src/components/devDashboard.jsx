@@ -1,78 +1,70 @@
-import React, { useState } from 'react'
-import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
-import Button from "@mui/material/Button";
-import Stack from '@mui/material/Stack';
-
+import { useEffect, useState } from "react"
+import { Link, useParams } from "react-router-dom"
+import axios from 'axios'
 const DevDashboard = () => {
-  const [skills, setSkills] = useState([])
-  const [errors, setErrors] = useState([]);
-  const navigate = useNavigate();
-  const submitHandler = (e) => {
-    e.preventDefault();
-    const skills = {
-      skills
+  const { id } = useParams()
+  const [dev, setDev] = useState(null)
+  const [error, setError] = useState(null)
+
+
+  const getDev = async () => {
+    try {
+      const dev = await axios.get(`http://localhost:3001/api/getOneDev/${id}`, { withCredentials: true })
+      setDev(dev.data)
+    } catch (err) {
+      setError(true)
     }
-    axios.post("http://localhost:8000/api/addSkills", skills,{withCredentials:true})
-      .then(res => {
-        console.log(res.data);
-        navigate('/');
-      })
-      .catch(err => {
-        const errorRes = err.response.data.errors;
-        console.log(errorRes)
-        const errArr = [];
-        for (const key of Object.keys(errorRes)) {
-          console.log(errorRes[key].message)
-          errArr.push(errorRes[key].message)
-        }
-        setErrors(errArr);
-      })
   }
-  return (
-    <div>
+  useEffect(() => {
+    getDev()
+  }, [])
+
+  if (!dev && !error) {
+    return <>
       <div className="topnav">
         <Link className="active">DevsOnDeck</Link>
-        <Link to={("/devs/login")} className="split">Log Out</Link>
+        <Link to={("/devs/login")} className="split">Dev Login</Link>
+        <Link to={("/orgs/login")} className="split">Orgs Login</Link>
       </div>
-      <h1>Add Your Skills</h1>
-      <Stack justifyContent="center" direction="row" spacing={2}>
-        <div>
-          <p>Pick Your Top 5 Languages</p>
-          <form onSubmit={submitHandler}>
-            <select className='square' name="skills" id="skills" multiple value={skills}
-              onChange={(e) => { setSkills(e.target.value) }}>
-              <option value="HTML">HTML</option>
-              <option value="CSS">CSS</option>
-              <option value="RUBY">PYTHON</option>
-              <option value="SQL">SQL</option>
-              <option value="JAVASCRIPT">JAVASCRIPT</option>
-              <option value="JAVA">JAVA</option>
-              <option value="C#">C#</option>
-              <option value="GO">GO</option>
-              <option value="TYPESCRIPT">TYPESCRYPT</option>
-            </select>
-            <br /><br />
-            <input type="submit" value="Submit"></input>
-          </form>
-        </div>
-        <div>
-          <p>Short Bio</p>
-          <textarea className='square' type="text" />
-        </div>
-      </Stack>
-      <p>Hold down the Ctrl (windows) or Command (Mac) button to select multiple options.</p>
-      <Stack justifyContent="center" direction="row" spacing={2}>
-        <Link to={("/devs/skills/frameworks")}>
-          <Button variant='contained' color='warning' >Skip This Step</Button>
-        </Link>
-        <Link to={("/devs/skills/frameworks")}>
-          <Button variant='contained' color='info' type="submit">Next Step: Frameworks & Libraries</Button>
-        </Link>
-      </Stack>
+      <h1 className='mt-40'>Fetching user Data ...</h1>
+    </>
+  }
 
-    </div>
+  if (error) {
+    return <>
+      <div className="topnav">
+        <Link className="active">DevsOnDeck</Link>
+        <Link to={("/devs/login")} className="split">Dev Login</Link>
+        <Link to={("/orgs/login")} className="split">Orgs Login</Link>
+      </div>
+      <h1 className='mt-40'>User Does Not Exist !</h1>
+
+    </>
+  }
+  return (
+    <>
+      <div className="topnav">
+        <Link className="active">DevsOnDeck</Link>
+        <Link to={("/devs/login")} className="split">Dev Login</Link>
+        <Link to={("/orgs/login")} className="split">Orgs Login</Link>
+      </div>
+      <div className="flex flex-col items-center justify-center gap-y-20 mt-40">
+        <h1 className="text-4xl font-bold">Hello, {dev.firstName + " " + dev.lastName} !</h1>
+        <div className="flex items-center justify-center gap-x-4">
+          <h3 className="text-2xl">
+            Click here to update or add new skills
+          </h3>
+
+          <Link to={`/devs/skills/${id}`} className="text-lg font-semibold border-2
+         border-black px-2 py-1 hover:bg-black hover:text-white
+         transition-all duration-300
+         ">
+            Update Skills
+          </Link>
+        </div>
+      </div>
+    </>
   )
 }
 
-export default DevDashboard;
+export default DevDashboard

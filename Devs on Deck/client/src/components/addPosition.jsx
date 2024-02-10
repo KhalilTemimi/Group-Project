@@ -11,6 +11,7 @@ const AddPosition = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [skills, setSkills] = useState([]);
+  const [error, setError] = useState(null)
 
   const { id } = useParams()
   const allSkills = ['HTML', 'CSS', 'RUBY', 'PYTHON', 'SQL', 'JAVASCRIPT', 'JAVA',
@@ -30,19 +31,26 @@ const AddPosition = () => {
   }
 
   const submitHandler = () => {
+    if (name === "" || skills.length === 0) {
+      console.log(name)
+      setError('You must fill the fields')
+    } else {
 
-    const newPosition = {
-      name,
-      description,
-      skills
+      const newPosition = {
+        name,
+        description,
+        skills
+      }
+      axios.patch(`http://localhost:3001/api/addPosition/${id}`, newPosition, { withCredentials: true })
+        .then(() => {
+          navigate(`/orgs/dashboard/${id}`);
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
-    axios.patch(`http://localhost:3001/api/addPosition/${id}`, newPosition, { withCredentials: true })
-      .then(() => {
-        navigate(`/orgs/dashboard/${id}`);
-      })
-      .catch(err => {
-        console.log(err)
-      })
+
+
   }
   return (
     <div>
@@ -51,6 +59,7 @@ const AddPosition = () => {
         <Link to={("/orgs/login")} className="split">Log Out</Link>
       </div>
       <h1>Add A position</h1>
+      <h3 className='error'>{error ? error : ""} !</h3>
       <FormControl>
         <TextField label="Name" variant='outlined' sx={{ m: 2 }} onChange={(e) => { setName(e.target.value) }} /><br />
         <TextField label="Description" variant='outlined' sx={{ m: 2 }} onChange={(e) => { setDescription(e.target.value) }} /><br />

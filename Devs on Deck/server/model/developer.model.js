@@ -11,7 +11,7 @@ const developerSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: [true, "The Email Name Is Required"],
+        required: [true, "The Email Is Required"],
         unique: true,
         lowercase: true,
     },
@@ -20,11 +20,14 @@ const developerSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: [true, "The Password Name Is Required"],
+        required: [true, "The Password Is Required"],
         minlength: [6, 'Password must be at least 6 characters long']
     },
     skills: {
         type: Array
+    },
+    bio: {
+        type: String
     }
 })
 
@@ -56,13 +59,14 @@ developerSchema.statics.getDev = async function (skills) {
 
     const resultArray = await this.find()
     const filteredArr = []
+    const skillsLength = skills.length
     resultArray.forEach(resArr => {
         const matching = containArray(skills, resArr.skills)
-        if (matching > 0) {
-            let percentage = (matching / resArr.skills.length) * 100 // getting the match percentage
+        if (matching > 0 && skillsLength > 0) {
+            let percentage = (matching / skillsLength) * 100 // getting the match percentage
 
-            const { firstName, lastName, _id, skills } = resArr
-            let finalRes = { firstName, lastName, _id, percentage, skills };
+            const { firstName, lastName, _id, skills, bio } = resArr
+            let finalRes = { firstName, lastName, _id, percentage, skills, bio };
             filteredArr.push(finalRes);
         }
     })

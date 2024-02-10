@@ -11,7 +11,7 @@ const DevRegister = () => {
     const [city, setCity] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [errors, setErrors] = useState({ nameError: '', LastNameError: '', emailError: '', passwordError: '' })
+    const [errors, setErrors] = useState({ nameError: '', LastNameError: '', emailError: '', passwordError: '', confirm: "" })
     const navigate = useNavigate();
     const submitHandler = (e) => {
         e.preventDefault();
@@ -22,20 +22,25 @@ const DevRegister = () => {
             city,
             password
         }
-        axios.post("http://localhost:3001/api/register", newDeveloper, { withCredentials: true })
-            .then(res => {
-                navigate('/devs/dashboard');
-            })
-            .catch(err => {
-                const error = err.response.data
-                console.log(error)
-                setErrors(prev => ({
-                    ...prev, ["emailError"]: error.email,
-                    ['passwordError']: error.password,
-                    ['LastNameError']: error.lastName,
-                    ['nameError']: error.firstName
-                }))
-            })
+        if (password !== confirmPassword) {
+            setErrors(prev => ({ ...prev, ['confirm']: "Password and Confirm Password do not match" }))
+        } else {
+            axios.post("http://localhost:3001/api/register", newDeveloper, { withCredentials: true })
+                .then(res => {
+                    navigate(`/devs/skills/${res.data._id}`);
+                })
+                .catch(err => {
+                    const error = err.response.data
+                    console.log(error)
+                    setErrors(prev => ({
+                        ...prev, ["emailError"]: error.email,
+                        ['passwordError']: error.password,
+                        ['LastNameError']: error.lastName,
+                        ['nameError']: error.firstName
+                    }))
+                })
+        }
+
     }
     return (
         <div>
@@ -45,6 +50,8 @@ const DevRegister = () => {
                 <Link to={("/orgs/login")} className="split">Orgs Login</Link>
             </div>
             <h1>Developer Sign Up</h1>
+
+            <h4 className='error'>{errors.confirm}</h4>
             <h4 className='error'>{errors.nameError}</h4>
             <h4 className='error'>{errors.LastNameError}</h4>
             <h4 className='error'>{errors.emailError}</h4>

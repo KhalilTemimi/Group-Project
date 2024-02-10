@@ -103,11 +103,21 @@ const OrgDashboard = () => {
                             {dev.skills.map((skill, idx) => (
                               <h3 key={idx}>{skill}</h3>
                             ))}
+
                           </>
                         ) : (
                           <h2>No skills available</h2>
                         )}
                       </div>
+                      {
+                        dev.bio && (
+                          <>
+                            <h3 className="text-black">
+                              {dev.bio} 
+                            </h3>
+                          </>
+                        )
+                      }
                     </div>
                   </ListGroup.Item>
                 ))

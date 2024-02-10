@@ -15,10 +15,10 @@ const OrgRegister = () => {
     orgState: ""
   });
   const [password, setPassword] = useState("");
-  const [cofirmPassword, setConfirmPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({
     firstName: '', lastName: "", orgName
-      : '', emailError: '', passwordError: ''
+      : '', emailError: '', passwordError: '', confirm: ""
   })
   const navigate = useNavigate();
   const submitHandler = (e) => {
@@ -31,23 +31,27 @@ const OrgRegister = () => {
       org,
       password
     }
-    console.log(newOrganization)
-    axios.post("http://localhost:3001/api/orgRegister", newOrganization, { withCredentials: true })
-      .then(res => {
-        console.log(res)
-        const id = res.data._id
-        navigate(`/orgs/dashboard/${id}`);
-      })
-      .catch(err => {
-        const error = err.response.data
-        setErrors(prev => ({
-          ...prev, ["emailError"]: error.email,
-          ['passwordError']: error.password,
-          ['lastName']: error.lastName,
-          ['firstName']: error.firstName,
-          ['orgName']: error.orgName
-        }))
-      })
+    if (password !== confirmPassword) {
+      setErrors(prev => ({ ['confirm']: "Password and Confirm Password do not match" }))
+    } else {
+      axios.post("http://localhost:3001/api/orgRegister", newOrganization, { withCredentials: true })
+        .then(res => {
+          console.log(res)
+          const id = res.data._id
+          navigate(`/orgs/dashboard/${id}`);
+        })
+        .catch(err => {
+          const error = err.response.data
+          setErrors(prev => ({
+            ...prev, ["emailError"]: error.email,
+            ['passwordError']: error.password,
+            ['lastName']: error.lastName,
+            ['firstName']: error.firstName,
+            ['orgName']: error.orgName,
+            ['confirm']: ""
+          }))
+        })
+    }
   }
   return (
     <div>
@@ -57,6 +61,7 @@ const OrgRegister = () => {
         <Link to={("/orgs/login")} className="split">Orgs Login</Link>
       </div>
       <h1>Organization Sign Up</h1>
+      <h4 className='error'>{errors.confirm}</h4>
       <h4 className='error'>{errors.firstName}</h4>
       <h4 className='error'>{errors.lastName}</h4>
       <h4 className='error'>{errors.emailError}</h4>
