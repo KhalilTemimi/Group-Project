@@ -21,15 +21,39 @@ module.exports.login = async (req, res) => {
     } catch (err) {
         const errors = HandleErrors(err)
         res.status(400).json(errors)
+<<<<<<< HEAD
+=======
+    }
+}
+
+module.exports.addSkillsBio = async (req, res) => {
+    const { skills, bio } = req.body
+    const { id } = req.params
+    try {
+        const newDev = await developer.findOneAndUpdate({ _id: id }, { skills: skills },
+                                        {bio: bio}, { new: true, runValidators: true })
+        res.status(200).json(newDev)
+    } catch (err) {
+        res.status(400).json("An Error Occured")
+        console.log("first")
+>>>>>>> d75fde3d6f0c72ddb8b0734df569980a165cd785
     }
 }
 
 module.exports.addSkills = async (req, res) => {
+<<<<<<< HEAD
     const { skills, bio } = req.body
     const { id } = req.params
     try {
         const newDev = await developer.findOneAndUpdate({ _id: id }, { skills: skills, bio: bio },
             { new: true, runValidators: true })
+=======
+    const { skills} = req.body
+    const { id } = req.params
+    try {
+        const newDev = await developer.findOneAndUpdate({ _id: id }, { skills: skills },
+                                        { new: true, runValidators: true })
+>>>>>>> d75fde3d6f0c72ddb8b0734df569980a165cd785
         res.status(200).json(newDev)
     } catch (err) {
         res.status(400).json("An Error Occured")
@@ -51,6 +75,7 @@ module.exports.findDev = async (req, res) => {
 
 }
 
+<<<<<<< HEAD
 
 //get all devs 
 
@@ -76,4 +101,17 @@ module.exports.getOneDev = async (req, res) => {
     } catch (err) {
         res.status(400).json({ error: err.message })
     }
+=======
+// get all developers
+module.exports.getAllDevelopers = (req, res) => {
+    developer.find({})
+        .then(Developers => {
+            console.log(Developers);
+            res.json(Developers);
+        })
+        .catch(err => {
+            console.log(err)
+            res.json(err)
+        })
+>>>>>>> d75fde3d6f0c72ddb8b0734df569980a165cd785
 }
