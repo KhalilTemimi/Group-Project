@@ -51,9 +51,6 @@ const OrgDashboard = () => {
         <Link className="active">DevsOnDeck</Link>
         <Link to={("/orgs/login")} className="split">Log Out</Link>
       </div>
-      <Link to={("/orgs/jobs/new")}>
-        <Button variant='contained' color='info' >List a New Position</Button>
-      </Link>
       <Stack justifyContent="center" direction="row" spacing={2}>
         <div>
           <Link to={(`/orgs/jobs/new/${id}`)}>
@@ -115,7 +112,7 @@ const OrgDashboard = () => {
                         dev.bio && (
                           <>
                             <h3 className="text-black">
-                              {dev.bio} 
+                              {dev.bio}
                             </h3>
                           </>
                         )

@@ -33,7 +33,7 @@ const AddPosition = () => {
   const submitHandler = () => {
     if (name === "" || skills.length === 0) {
       console.log(name)
-      setError('You must fill the fields')
+      setError('You must fill the fields !')
     } else {
 
       const newPosition = {
@@ -59,7 +59,7 @@ const AddPosition = () => {
         <Link to={("/orgs/login")} className="split">Log Out</Link>
       </div>
       <h1>Add A position</h1>
-      <h3 className='error'>{error ? error : ""} !</h3>
+      <h3 className='error'>{error ? error : ""}</h3>
       <FormControl>
         <TextField label="Name" variant='outlined' sx={{ m: 2 }} onChange={(e) => { setName(e.target.value) }} /><br />
         <TextField label="Description" variant='outlined' sx={{ m: 2 }} onChange={(e) => { setDescription(e.target.value) }} /><br />

@@ -14,7 +14,7 @@ const orgSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: [true, "The Email Name is Required"],
+        required: [true, "The Email is Required"],
         unique: true,
         lowercase: true,
     },
@@ -22,7 +22,7 @@ const orgSchema = new mongoose.Schema({
         orgCity: {
             type: String
         },
-        orgAddress: {  // Corrected typo in property name
+        orgAddress: {
             type: String,
         },
         orgState: {
@@ -67,12 +67,12 @@ orgSchema.statics.login = async function (email, password) {
 orgSchema.statics.getPositionArray = async function (newPositionn, id) {
     const resultArray = await this.find({ _id: id })
 
-    if(resultArray) {
+    if (resultArray) {
         return resultArray[0]
-    }else {
+    } else {
         throw new Error('Not Found')
     }
-    
+
 
 
 }
