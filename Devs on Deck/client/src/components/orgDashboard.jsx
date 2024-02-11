@@ -84,7 +84,7 @@ const OrgDashboard = () => {
           </Card>
         </div>
         <div>
-          <Card style={{ width: '600px' }}>
+          <Card style={{ width: '50rem' }}>
             <Card.Body>
               <Card.Header as="h3">Available Devs : </Card.Header>
             </Card.Body>
@@ -124,6 +124,7 @@ const OrgDashboard = () => {
                 <h1>No developers available</h1>
               )}
             </ListGroup>
+           
           </Card>
         </div>
       </Stack >

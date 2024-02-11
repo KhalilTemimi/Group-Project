@@ -76,7 +76,7 @@ const AddPosition = () => {
         </div>
 
         <Stack justifyContent="center" direction="row" spacing={2}>
-          <Link to={("/orgs/dashboard/"+id)}>
+          <Link to={(`/orgs/dashboard/${id}`)}>
             <Button variant='contained' color='warning' >Cancel</Button>
           </Link>
           <Button onClick={submitHandler} variant='contained' color='success' type="submit">Add Position</Button>
