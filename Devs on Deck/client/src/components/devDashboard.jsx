@@ -23,8 +23,7 @@ const DevDashboard = () => {
     return <>
       <div className="topnav">
         <Link className="active">DevsOnDeck</Link>
-        <Link to={("/devs/login")} className="split">Dev Login</Link>
-        <Link to={("/orgs/login")} className="split">Orgs Login</Link>
+        <Link to={("/devs/login")} className="split">Log Out</Link>
       </div>
       <h1 className='mt-40'>Fetching user Data ...</h1>
     </>
@@ -34,8 +33,7 @@ const DevDashboard = () => {
     return <>
       <div className="topnav">
         <Link className="active">DevsOnDeck</Link>
-        <Link to={("/devs/login")} className="split">Dev Login</Link>
-        <Link to={("/orgs/login")} className="split">Orgs Login</Link>
+        <Link to={("/devs/login")} className="split">Log Out</Link>
       </div>
       <h1 className='mt-40'>User Does Not Exist !</h1>
 
@@ -45,8 +43,7 @@ const DevDashboard = () => {
     <>
       <div className="topnav">
         <Link className="active">DevsOnDeck</Link>
-        <Link to={("/devs/login")} className="split">Dev Login</Link>
-        <Link to={("/orgs/login")} className="split">Orgs Login</Link>
+        <Link to={("/devs/login")} className="split">Log Out</Link>
       </div>
       <div className="flex flex-col items-center justify-center gap-y-20 mt-40">
         <h1 className="text-4xl font-bold">Hello, {dev.firstName + " " + dev.lastName} !</h1>

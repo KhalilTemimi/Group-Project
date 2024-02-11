@@ -46,8 +46,7 @@ const AddSkills = () => {
     <div>
       <div className="topnav">
         <Link className="active">DevsOnDeck</Link>
-        <Link to={("/devs/login")} className="split">Dev Login</Link>
-        <Link to={("/orgs/login")} className="split">Orgs Login</Link>
+        <Link to={("/devs/login")} className="split">Log Out</Link>
       </div>
       <div>
         {handleDisplay()}

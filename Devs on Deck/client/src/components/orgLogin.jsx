@@ -34,6 +34,7 @@ const OrgLogin = () => {
                 <Link className="active">DevsOnDeck</Link>
                 <Link to={("/")} className="split">Dev Registration</Link>
                 <Link to={("/orgs/register")} className="split">Orgs Registration</Link>
+               
             </div>
             <h1>Welcome Back!</h1>
             <h3>Let's find you Some Candidates!</h3>
@@ -45,6 +46,7 @@ const OrgLogin = () => {
                 <TextField label="Email" variant='outlined' sx={{ m: 1, width: 500 }} onChange={(e) => { setEmail(e.target.value) }} /><br />
                 <TextField label="Password" variant='outlined' sx={{ m: 1, width: 500 }} onChange={(e) => { setPassword(e.target.value) }} /><br />
                 <Button variant='contained' color='success' sx={{ m: 1 }} type="submit">Log In</Button><br /><br />
+                <Link className="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" to={("/devs/login")}>Login as a Developer</Link>
             </form>
         </div>
     )

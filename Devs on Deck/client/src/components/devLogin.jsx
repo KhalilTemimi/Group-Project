@@ -46,6 +46,7 @@ const DevLogin = () => {
                 <TextField label="Email" variant='outlined' sx={{ m: 1, width: 500 }} onChange={(e) => { setEmail(e.target.value) }} /><br />
                 <TextField label="Password" variant='outlined' sx={{ m: 1, width: 500 }} onChange={(e) => { setPassword(e.target.value) }} /><br />
                 <Button variant='contained' color='success' sx={{ m: 1 }} type="submit">Log In</Button><br /><br />
+                <Link to={("/orgs/login")}>Login as an Organization</Link>
             </form>
         </div>
     )
